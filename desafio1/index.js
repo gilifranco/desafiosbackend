@@ -1,5 +1,5 @@
 class Usuario {
-    constructor (nombre, apellido, libros = null, mascotas = null) {
+    constructor (nombre, apellido, libros, mascotas) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.libros = libros || [];
@@ -32,5 +32,5 @@ let usuario = new Usuario("Franco","Ramirez");
 usuario.getFullName();
 usuario.addMascota("Frida");
 usuario.countMascotas();
-usuario.addBook("El Principito", "A. Saint-Exupery");
+usuario.addBook("El Pibe que arruinaba las fotos", "Hernan Casciari");
 usuario.getBookNames();

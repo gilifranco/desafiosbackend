@@ -1,4 +1,4 @@
-const Contenedor = require("./metodos");
+const Contenedor = require("./metodo");
 const express = require('express');
 const app = express();
 

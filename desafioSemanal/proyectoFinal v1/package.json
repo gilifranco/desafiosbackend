@@ -1,7 +1,6 @@
 {
   "name": "proyectofinal",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "serve": "nodemon src/app.js",
@@ -13,5 +12,6 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.3"
-  }
+  },
+  "description": ""
 }

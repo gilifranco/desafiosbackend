@@ -1,0 +1,88 @@
+[2022-06-20T00:17:02.255] [ERROR] default - ReferenceError: asDto is not defined
+    at ProductoDaoMem.getAll (D:\Escritorio\17 marc\src\daos\productoDaoMem.js:22:5)
+    at ProductRepo.getAll (D:\Escritorio\17 marc\src\repos\productRepo.js:13:38)
+    at ProductService.getAll (D:\Escritorio\17 marc\src\services\productService.js:14:49)
+    at getProductosTest (D:\Escritorio\17 marc\src\controllers\productos.js:6:51)
+    at Layer.handle [as handle_request] (D:\Escritorio\17 marc\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\Escritorio\17 marc\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\Escritorio\17 marc\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\Escritorio\17 marc\node_modules\express\lib\router\layer.js:95:5)
+    at D:\Escritorio\17 marc\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\Escritorio\17 marc\node_modules\express\lib\router\index.js:341:12)
+[2022-06-20T00:27:57.504] [ERROR] default - ReferenceError: asDto is not defined
+    at ProductoDaoMem.getAll (D:\Escritorio\17 marc\src\daos\productoDaoMem.js:22:5)
+    at ProductRepo.getAll (D:\Escritorio\17 marc\src\repos\productRepo.js:13:38)
+    at ProductService.getAll (D:\Escritorio\17 marc\src\services\productService.js:14:49)
+    at getProductosTest (D:\Escritorio\17 marc\src\controllers\productos.js:6:51)
+    at Layer.handle [as handle_request] (D:\Escritorio\17 marc\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\Escritorio\17 marc\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\Escritorio\17 marc\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\Escritorio\17 marc\node_modules\express\lib\router\layer.js:95:5)
+    at D:\Escritorio\17 marc\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\Escritorio\17 marc\node_modules\express\lib\router\index.js:341:12)
+[2022-06-20T00:29:04.624] [ERROR] default - ReferenceError: asDto is not defined
+    at ProductoDaoMem.getAll (D:\Escritorio\17 marc\src\daos\productoDaoMem.js:22:5)
+    at ProductRepo.getAll (D:\Escritorio\17 marc\src\repos\productRepo.js:13:38)
+    at ProductService.getAll (D:\Escritorio\17 marc\src\services\productService.js:14:49)
+    at getProductosTest (D:\Escritorio\17 marc\src\controllers\productos.js:6:51)
+    at Layer.handle [as handle_request] (D:\Escritorio\17 marc\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\Escritorio\17 marc\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\Escritorio\17 marc\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\Escritorio\17 marc\node_modules\express\lib\router\layer.js:95:5)
+    at D:\Escritorio\17 marc\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\Escritorio\17 marc\node_modules\express\lib\router\index.js:341:12)
+[2022-06-20T00:29:06.763] [ERROR] default - ReferenceError: asDto is not defined
+    at ProductoDaoMem.getAll (D:\Escritorio\17 marc\src\daos\productoDaoMem.js:22:5)
+    at ProductRepo.getAll (D:\Escritorio\17 marc\src\repos\productRepo.js:13:38)
+    at ProductService.getAll (D:\Escritorio\17 marc\src\services\productService.js:14:49)
+    at getProductosTest (D:\Escritorio\17 marc\src\controllers\productos.js:6:51)
+    at Layer.handle [as handle_request] (D:\Escritorio\17 marc\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\Escritorio\17 marc\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\Escritorio\17 marc\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\Escritorio\17 marc\node_modules\express\lib\router\layer.js:95:5)
+    at D:\Escritorio\17 marc\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\Escritorio\17 marc\node_modules\express\lib\router\index.js:341:12)
+[2022-06-20T00:29:07.772] [ERROR] default - ReferenceError: asDto is not defined
+    at ProductoDaoMem.getAll (D:\Escritorio\17 marc\src\daos\productoDaoMem.js:22:5)
+    at ProductRepo.getAll (D:\Escritorio\17 marc\src\repos\productRepo.js:13:38)
+    at ProductService.getAll (D:\Escritorio\17 marc\src\services\productService.js:14:49)
+    at getProductosTest (D:\Escritorio\17 marc\src\controllers\productos.js:6:51)
+    at Layer.handle [as handle_request] (D:\Escritorio\17 marc\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\Escritorio\17 marc\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\Escritorio\17 marc\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\Escritorio\17 marc\node_modules\express\lib\router\layer.js:95:5)
+    at D:\Escritorio\17 marc\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\Escritorio\17 marc\node_modules\express\lib\router\index.js:341:12)
+[2022-06-20T00:31:26.312] [ERROR] default - ReferenceError: asDto is not defined
+    at ProductoDaoMem.getAll (D:\Escritorio\17 marc\src\daos\productoDaoMem.js:22:5)
+    at ProductRepo.getAll (D:\Escritorio\17 marc\src\repos\productRepo.js:13:38)
+    at ProductService.getAll (D:\Escritorio\17 marc\src\services\productService.js:14:49)
+    at getProductosTest (D:\Escritorio\17 marc\src\controllers\productos.js:6:51)
+    at Layer.handle [as handle_request] (D:\Escritorio\17 marc\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\Escritorio\17 marc\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\Escritorio\17 marc\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\Escritorio\17 marc\node_modules\express\lib\router\layer.js:95:5)
+    at D:\Escritorio\17 marc\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\Escritorio\17 marc\node_modules\express\lib\router\index.js:341:12)
+[2022-06-20T00:34:49.740] [ERROR] default - ReferenceError: asDto is not defined
+    at ProductoDaoMem.getAll (D:\Escritorio\17 marc\src\daos\productoDaoMem.js:22:5)
+    at ProductRepo.getAll (D:\Escritorio\17 marc\src\repos\productRepo.js:13:38)
+    at ProductService.getAll (D:\Escritorio\17 marc\src\services\productService.js:14:49)
+    at getProductosTest (D:\Escritorio\17 marc\src\controllers\productos.js:6:51)
+    at Layer.handle [as handle_request] (D:\Escritorio\17 marc\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\Escritorio\17 marc\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\Escritorio\17 marc\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\Escritorio\17 marc\node_modules\express\lib\router\layer.js:95:5)
+    at D:\Escritorio\17 marc\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\Escritorio\17 marc\node_modules\express\lib\router\index.js:341:12)
+[2022-06-20T00:35:03.233] [ERROR] default - ReferenceError: asDto is not defined
+    at ProductoDaoMem.getAll (D:\Escritorio\17 marc\src\daos\productoDaoMem.js:22:5)
+    at ProductRepo.getAll (D:\Escritorio\17 marc\src\repos\productRepo.js:13:38)
+    at ProductService.getAll (D:\Escritorio\17 marc\src\services\productService.js:14:49)
+    at getProductosTest (D:\Escritorio\17 marc\src\controllers\productos.js:6:51)
+    at Layer.handle [as handle_request] (D:\Escritorio\17 marc\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\Escritorio\17 marc\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\Escritorio\17 marc\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\Escritorio\17 marc\node_modules\express\lib\router\layer.js:95:5)
+    at D:\Escritorio\17 marc\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\Escritorio\17 marc\node_modules\express\lib\router\index.js:341:12)

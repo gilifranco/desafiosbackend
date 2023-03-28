@@ -1,77 +1,129 @@
-const dotenv = require("dotenv").config();
-const express = require("express");
+//* Importaciones de módulos
+const express = require('express');
+const path = require('path');
+const compression = require('compression');
+const passport = require('passport')
+const session = require('express-session')
+const { Server: HttpServer } = require('http')
+const { Server: IOServer } = require('socket.io')
+
+//* Importaciones de archivos
+const RouterProductos = require('./src/route/productos')
+const RouterMensajes = require('./src/route/mensajes')
+const RouterCarritos = require('./src/route/carritos')
+const RouterUsuarios = require('./src/route/usuarios')
+const RouterOrdenes = require('./src/route/ordenes')
+
+const ControllerInicio = require('./src/controller/inicio')
+const {error404} = require ('./src/controller/errores')
+const {initServer} = require('./src/service/initServer')
+const configSession = require('./src/config/session')
+
+//* Middlewares
 const app = express();
-require("./src/mongodb/mongooseLoader");
-const PORT = process.env.PORT || 8080;
-const logger = require("./src/utils/logger");
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use(compression());
 
-const session = require("express-session");
-const passport = require("passport");
-const passportStrategy = require("./src/utils/passport");
-const MongoStore = require("connect-mongo");
-const flash = require('connect-flash');
+//* Configurar EJS
+const publicPath = path.resolve(__dirname, "./public");
+app.use(express.static(publicPath));
+app.set('view engine', 'ejs');
 
-const clusterMode = false;
-const cluster = require("cluster");
-const numCPUs = require("os").cpus().length;
+//* Inicializar controladores
+const inicio = new ControllerInicio()
 
-const errorHandler = require("./src/middlewares/errorHandler");
-const notFound = require("./src/middlewares/notFound");
+//* Configurar session
+app.use(session(configSession));
+app.use(passport.initialize());
+app.use(passport.session());
 
-const apiProductos = require("./src/routes/productos");
-const apiCarritos = require("./src/routes/carritos");
-const login = require("./src/routes/login");
-const logout = require("./src/routes/logout");
-const register = require("./src/routes/register");
+//* Configurar http server apra socket io
+const httpServer = new HttpServer(app); 
+const io = new IOServer(httpServer);
 
-if (cluster.isMaster && clusterMode) {
-  logger.info(`PID MASTER ${process.pid}`);
-  for (let i = 0; i < numCPUs; i++) {
-    cluster.fork();
-  }
-  cluster.on('exit', worker => {
-    logger.info("Worker", worker.process.pid, "died", new Date().toLocaleString());
-    cluster.fork();
-  })
-}
-else {
+//* Inicializar rutas
+const routerProductos = new RouterProductos()
+const routerMensajes = new RouterMensajes()
+const routerCarritos = new RouterCarritos()
+const routerUsuarios = new RouterUsuarios()
+const routerOrdenes = new RouterOrdenes()
 
-  app.use(
-    session({
-      secret: "AqWzsxEDCvFvbNPaNBdsWQl",
-      resave: true,
-      saveUninitialized: false,
-      store: MongoStore.create({
-        mongoUrl: process.env.MONGODB_URL,
-        ttl: 600000,
-        autoRemove: "native",
-      }),
-      cookie: {
-        secure: false,
-        maxAge: 600000
+const LocalStrategy = require('passport-local').Strategy
+const {validatePass} = require('./src/utils/passValidator')
+const {createHash} = require('./src/utils/hashGenerator')
+const ServiceUsuarios = require('./src/service/usuarios')
+const serviceUsuarios = new ServiceUsuarios ()
+
+passport.use('login', new LocalStrategy (
+  async (username, password, callback) => {
+    let user = await serviceUsuarios.obtenerUsuario(username)
+    if(user.error) {
+      return callback(user.error) // fallo de búsqueda
+    } else if (user.notFound){
+      return callback(null, false) // no se encontró usuario
+    } else {
+      if(!validatePass(user, password)){
+        return callback(null, false) // password incorrecto
+      } else {
+        return callback(null, user) // devuelve el usuario
       }
-    })
-  );
+    }
+  }
+));
+  
+passport.use('signup', new LocalStrategy(
+    {passReqToCallback: true}, async (req, username, password, callback) => {
+      const newUser = {
+      email: username,
+      password: createHash(password),
+      name: req.body.name,
+      lastname: req.body.lastname,
+      age: req.body.age,
+      alias: req.body.alias,
+      address: req.body.address,
+      cartId: 0
+    }
+    let userStatus = await serviceUsuarios.guardarUsuarios(newUser);
+    
+    if (userStatus.found){
+      return callback(null, false)
+    } else {
+      return callback(null, newUser)
+    }
+  }
+))
+  
+passport.serializeUser((user, callback) => {
+  callback(null, user.email) // se pasa email porque es único en la DB
+})
 
-  app.use(express.static("./public"));
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
+passport.deserializeUser(async (email, callback) => {
+  let user = await serviceUsuarios.obtenerUsuario(email);
+  callback (null, user)
+})
 
-  app.use(passport.initialize());
-  app.use(passport.session());
-  app.use(flash());
+//* Ruters
+app.use('/productos', routerProductos.start())
+app.use('/chat', routerMensajes.start())
+app.use('/carritos', routerCarritos.start())
+app.use('/usuarios', routerUsuarios.start())
+app.use('/ordenes', routerOrdenes.start())
 
-  app.use("/api/productos", apiProductos);
-  app.use("/api/carrito", apiCarritos);
-  app.use("/api", login);
-  app.use("/api", register);
-  app.use("/api", logout);
+//* Websocket
+io.on('connection', socket => routerMensajes.socketChat(socket, io));
 
-  app.use(errorHandler);
-  app.use(notFound);
+//* Ruta raíz
+app.get('/', inicio.getRoot);
 
-  const server = app.listen(PORT, () => {
-    logger.info(`(Pid: ${process.pid}) Servidor Express escuchando peticiones en el puerto ${server.address().port}`);
-  });
-  server.on("error", (error) => logger.error(`Error en servidor ${error}`));
-}
+//* Ruta para registrarse
+app.get('/registrarse', inicio.getRegister);
+
+//* Ruta para ver configuraciones
+app.get('/config', inicio.getConfig);
+
+//* Iniciar servidor
+initServer(httpServer);
+
+//* Rutas no contempladas
+app.get('*', error404);

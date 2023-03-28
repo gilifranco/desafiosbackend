@@ -1,30 +1,85 @@
-# Tercera entrega del proyecto final
-Deberás entregar el avance de tu aplicación eCommerce Backend correspondiente a la tercera entrega de tu proyecto final.
+# Curso Backend - MERN Stack: Proyecto Final
+## E-commerce project
+#
 
-Formato: link a un repositorio en Github con el proyecto cargado.
+**TEMÁTICA:** Tienda online de venta de productos.
 
-Sugerencia: no incluir los node_modules
+### Descripciones generales
+Desarrollo de backend de una aplicación e-commerce para vender productos referidos a Star Wars. Contiene: 
+- Las rutas necesarias para listar productos existentes, ingresar productos nuevos, borrar y modificar sus detalles, así como interactuar con el carrito de compras.
+- Se implementó una API RESTful con los verbos get, post, put y delete para cumplir con las acciones necesarias.
+- Se brindó al frontend un mecanismo de ingreso autorizado al sistema
+basado en JWT (Json Web Token).
+- Los productos ingresados se almacenan en una base de datos MongoDB.
+- El usuario puede registrar sus credenciales de acceso (email y password) para
+luego poder ingresar a su cuenta. Estas credenciales son guardadas en la
+base de datos MongoDB con contraseña encriptada.
+- El cliente tiene una sesión activa de usuario con tiempo de expiración configurable mediante variable de entorno.
+- Se implementó un canal de chat basado en websockets, el cual permite atender
+las consultas del cliente.
+- La arquitectura del servidor está basada en capas (MVC)
+- El servidor puede tomar configuraciones desde un archivo externo.
+- Se dispone de una vista creada con ejs, que permite ver la configuración del
+servidor.
+- Se envía un mail a una casilla configurable, por cada registro nuevo de usuario
+y con cada orden de compra generada.
 
-## Se debe entregar:
+### Implementación de Frontend
+No se implementará Frontend, salvo en las situaciones donde sea necesario para realizar las pruebas. Este frontend de pruebas esta implementado mediante ejs para:
+- El **chat**, ya que se necesita comprobar el funcionamiento del socket.
+- El **ingreso al sistema**, ya que se debe comprobarl el correcto inicio de sesión con passport.
+- La **vista de configuración** del servidor.
 
-- Un menú de registro y autenticación de usuarios basado en passport local, guardando en la base de datos las credenciales y el resto de los datos ingresados al momento del registro.
-- El registro de usuario consiste en crear una cuenta en el servidor almacenada en la base de datos, que contenga el email y password de usuario, además de su nombre, dirección, edad, número de teléfono (debe contener todos los prefijos internacionales) y foto ó avatar.
-La contraseña se almacenará encriptada en la base de datos.
-- La imagen se podrá subir al servidor y se guardará en una carpeta pública del mismo a la cual se tenga acceso por url.
-- Un formulario post de registro y uno de login. De modo que, luego de concretarse cualquiera de estas operaciones en forma exitosa, el usuario accederá a su home.
-- El usuario se logueará al sistema con email y password y tendrá acceso a un menú en su vista, a modo de barra de navegación.
-Esto le permitirá ver los productos totales con los filtros que se hayan implementado y su propio carrito de compras e información propia (datos de registro con la foto).
-Además, dispondrá de una opción para desloguearse del sistema.
-- Ante la incorporación de un usuario, el servidor enviará un email al administrador con todos los datos de registro y asunto 'nuevo registro', a una dirección que se encuentre por el momento almacenada en una constante global.
-- Envío de un email y un mensaje de whatsapp al administrador desde el servidor, a un número de contacto almacenado en una constante global.
-- El usuario iniciará la acción de pedido en la vista del carrito.
-- Será enviado una vez finalizada la elección para realizar la compra de productos.
-- El email contendrá en su cuerpo la lista completa de productos a comprar y en el asunto la frase 'nuevo pedido de ' y el nombre y email del usuario que los solicitó.
-En el mensaje de whatsapp se debe enviar la misma información del asunto del email.
-- El usuario recibirá un mensaje de texto al número que haya registrado, indicando que su pedido ha sido recibido y se encuentra en proceso.
+### Tecnologías usadas
+- Node.js
+- MongoDB
+- Passport JWT
+- Mongoose
+- Bcrypt
+- Socket.io
+- Dotenv
+- Ejs
+- Nodemailer
 
-### Aspectos a incluir en el entregable:
-- El servidor trabajará con una base de datos DBaaS (Ej. MongoDB Atlas) y estará preparado para trabajar en forma local o en la nube a través de la plataforma PaaS Heroku.
-- Habilitar el modo cluster para el servidor, como opcional a través de una constante global.
-- Utilizar alguno de los loggers ya vistos y así reemplazar todos los mensajes a consola por logs eficientes hacia la misma consola. En el caso de errores moderados ó graves el log tendrá además como destino un archivo elegido.
-- Realizar una prueba de performance en modo local, con y sin cluster, utilizando Artillery en el endpoint del listado de productos (con el usuario vez logueado). Verificar los resultados.
+### Descripciones específicas
+
+**INICIO** -> al requerir la ruta `/`:
+- Se muestra un menú de ingreso al sistema con email y password así como también la posibilidad de registro de un nuevo usuario.
+- El menú de registro consta del nombre completo del cliente, número telefónico, email y campo de password duplicado para verificar coincidencia.
+- Si un usuario se loguea exitosamente o está en sesión activa, la ruta '/' hará una re dirección a la ruta `/productos`.
+- La ruta `/productos` devuelve el listado de todos los productos disponibles para la compra.
+- La ruta `/productos/:categoria` devuelve los productos por la categoría requerida.
+- Los ítems pueden ser agregados al carrito de compras y listados a través de la ruta `/carrito`.
+- Se puede modificar y borrar por su id a través de la ruta `/carrito:id`.
+
+**FLOW** -> Se puede solicitar un producto específico con la ruta `/productos/:id`, donde id es el id del item generado por MongoDB y devuelve la descripción del producto ( foto, precio, selector de cantidad). Si se ingresa a `/productos/:id` y el producto no existe en MongoDB, se respinde con un mensaje adecuado que indica algo relacionado a que el producto no existe.
+
+**MONGODB** -> se implementaron las siguientes colecciones:
+- *usuarios:* clientes registrados
+- *productos:* catálogo completo
+  * Link para foto (se almacena de modo estático en la página en una subruta </images/:productoid>)
+  * Precio unitario
+  * Descripción
+  * Categoría
+- *mensajes:* chat del usuario (preguntas y respuestas)
+  * Email: del usuario que pregunta o al que se responde
+  * Tipo (‘usuario’ para preguntas ó ‘sistema’ para respuestas)
+  * Fecha y hora
+  * Cuerpo del mensaje
+- *carrito:* orden temporal de compra
+  * Email
+  * Fecha y hora
+  * Items con sus cantidades
+  * Dirección de entrega
+- *ordenes:* las órdenes generadas, que deben incluir los productos, descripciones y los precios al momento de la compra.
+  * Ítems: las órdenes pueden tener productos surtidos, cada uno con su cantidad
+  * Número de orden: Se extrae de la cantidad de órdenes almacenadas
+  * Fecha y hora
+  * estado ( por defecto en ‘generada’)
+  * Email de quién realizó la orden
+
+**ENVIO DE MAILS** -> Finalizada la orden, se envia un mail a la dirección de la cuenta con los detalles de la orden.
+
+**ARCHIVO DE CONFIGURACIÓN** -> Se dispone de un archivo de configuración externo con opciones para desarrollo y otras para producción, que son visualizadas a través de la vista `/config`. Como parámetros de configuración esta el puerto de escucha del servidor, la url de la base de datos, el mail que recibirá notificaciones del backend, tiempo de expiración de sesión y los que sea necesario incluir.
+
+**CANAL DE CHAT** -> Se cuenta con un canal de chat general donde el usuario enviará los mensajes en la ruta `/chat` y en `/chat/:email` puede ver sólo los suyos. Se utiliza la colección mensajes en MongoDB. La tecnología de comunicación es Websockets. El servidor implementa una vista, utilizando ejs, para visualizar todos los mensajes y poder responder individualmente a ellos, eligiendo el email de respuesta.

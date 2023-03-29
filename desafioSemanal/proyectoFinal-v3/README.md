@@ -38,7 +38,7 @@ No se implementará Frontend, salvo en las situaciones donde sea necesario para 
 - Bcrypt
 - Socket.io
 - Dotenv
-- Ejs
+- Ejs(EJS (Embedded JavaScript Templating) es uno de los motores de plantillas más populares en JavaScript. Como su nombre lo indica, puede usarlo para incrustar código JavaScript en un lenguaje de plantilla para generar HTML. Este artículo proporciona una guía detallada para modelar su aplicación de nodo con EJS.)
 - Nodemailer
 
 ### Descripciones específicas

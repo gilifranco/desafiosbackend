@@ -104,7 +104,7 @@ else {
   app.use("/api", renderRoute);
 
 
-  /* desactivo el child process para el análisis de performance
+  // desactivo el child process para el análisis de performance
   app.get("/random/:cant?", (req, res) => {
     const forked = fork('./utils/generateRandom.js');
     let cant = +req.params.cant || 100000000;
@@ -113,7 +113,7 @@ else {
       res.send(numeros.res);
     })
   })
-  */
+  
 
 const srv = server.listen(PORT.p, () => {
   logger.info(

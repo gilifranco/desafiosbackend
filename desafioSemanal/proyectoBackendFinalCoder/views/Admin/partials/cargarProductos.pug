@@ -1,0 +1,35 @@
+h2(style="color:blue;") agregar Producto
+br
+form(action="/products", method="post")
+    div.d-flex
+        div.flex-fill(class="form-group")
+            label(for="name")
+                b Nombre
+            input#name.form-control(type="text", name="name")
+        div.flex-fill(class="form-group")
+            label(for="category")
+                b Categoria
+            input#category.form-control(type="text", name="category")
+        div.flex-fill(class="form-group")
+            label(for="description")
+                b Descripcion
+            input#description.form-control(type="text", name="description")
+    div.d-flex
+        div.flex-fill(class="form-group")
+            label(for="code")
+                b Codigo
+            input#code.form-control(type="text", name="code")
+        div.flex-fill(class="form-group")
+            label(for="price")
+                b Precio
+            input#price.form-control(type="number", name="price")
+    div.d-flex
+        div.flex-fill(class="form-group")
+            label(for="stock")
+                b Stock
+            input#stock.form-control(type="number", name="stock")
+        div.flex-fill(class="form-group")
+            label(for="photo")
+                b Foto
+            input#photo.form-control(type="text", name="photo")
+    button.btn.btn-success.mt-3.mb-5 Enviar

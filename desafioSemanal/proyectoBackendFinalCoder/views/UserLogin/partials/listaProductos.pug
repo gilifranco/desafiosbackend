@@ -1,0 +1,29 @@
+h2(style="color:crimson;") Buscar Producto
+form.d-flex(action="/productos/busqueda", method="post")
+    div.flex-fill(class="form-group")
+        input#nameb.form-control(type="text", name="nameb", placeholder="Nombre")
+    button#Buscar.btn.btn-success.mb-3 Buscar
+h2(style="color:crimson;") Listado de productos
+    if productos && productos.length > 0
+        div(class="table-responsive")
+            table.table.table-dark.my-2
+                tr(style="color: yellow;")
+                    th Nombre
+                    th Descripcion
+                    th Codigo
+                    th Precio
+                    th Stock
+                    th Foto
+                each val in productos
+                    tr
+                        td= val.name
+                        td= val.description
+                        td= val.code
+                        td= val.price
+                        td= val.stock
+                        td= val.photo
+                        td
+                            form(onsubmit=`return añadirCarrito("${val._id}", "${val.code}")`)
+                                button.btn.btn-success.btn-sm(type='submit') Añadir al carrito
+    else
+        h3(class="alert alert-danger") No products

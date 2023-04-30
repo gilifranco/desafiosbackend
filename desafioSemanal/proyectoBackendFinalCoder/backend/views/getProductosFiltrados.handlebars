@@ -1,0 +1,18 @@
+<h3>{{cantidadDeProductosEncontrados}} producto/s encontrado/s</h3>
+
+<div>
+    <table>
+        <tr> 
+            <th>nombre</th><th>precio</th> 
+    {{#each productosFiltrados}}
+        <tr>
+            <td>{{this.nombre}}</td>
+            <td>{{this.precio}}</td>
+            <form action="/api/agregaralcarrito/{{this._id}}" method="post">
+            <td><input type="submit" value="agregar al carrito"></td>
+            </form>
+        </tr>    
+    {{/each}} 
+        </tr> 
+    </table>
+</div>  

@@ -1,0 +1,26 @@
+<h3>{{cantidadDeProductosEncontrados}} producto/s encontrado/s</h3>
+
+<div>
+    <table>
+        <tr> 
+            <th>nombre</th><th>precio</th> 
+    {{#each productosFiltrados}}
+        <tr>
+            <td>{{this.nombre}}</td>
+            <td>{{this.precio}}</td>
+            <form action="/api/agregaralcarrito/{{this._id}}" method="post">
+            <td><input type="submit" value="agregar al carrito"></td>
+            </form>
+            <form action="/api/actualizarproducto/{{this._id}}" method="get">
+            <td><button>editar</button></td>
+            </form>
+            <form action="/api/eliminarproducto/{{this._id}}?_method=DELETE" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <td><button>eliminar</button></td>
+            </form>
+        </tr>    
+    {{/each}} 
+        </tr> 
+    </table><br>
+    <button onclick="location.href='/api/productos'">quitar filtros</button>
+</div>  

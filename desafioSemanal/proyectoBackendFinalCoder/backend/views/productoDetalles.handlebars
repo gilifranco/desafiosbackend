@@ -1,0 +1,74 @@
+<button onclick="location.href='/api/productos'">Inicio</button>
+
+<h2>{{producto.nombre}}</h2>
+<p>{{producto.precio}}</p>
+<p>{{producto.categoria}}</p>
+<p>{{producto.descripcion}}</p>
+
+<form action="/api/agregaralcarrito/{{this._id}}" method="post">
+    <td><input type="submit" value="agregar al carrito"></td>
+</form>
+
+<hr>
+
+<h3>publicar opinion</h3>
+
+<form action="/api/publicaropinion/{{producto._id}}" method="post">
+    <textarea name="opinion" id="" cols="30" rows="10"></textarea><br>
+    <input type="radio" name="calificacion" id="" value="1">1
+    <input type="radio" name="calificacion" id="" value="2">2
+    <input type="radio" name="calificacion" id="" value="3">3
+    <input type="radio" name="calificacion" id="" value="4">4
+    <input type="radio" name="calificacion" id="" value="5">5<br>
+
+    <input type="submit" value="publicar">
+</form>
+
+<hr>
+
+<h3>opiniones</h3>
+
+<h5>calificacion media: {{promedioDeCalificacion}}</h5>
+<hr>
+<h5>ordenar por:</h5> 
+<form action="/api/opiniones/filtrar/{{producto._id}}" method="post">
+    <input type="radio" name="ordenar" value="masReciente" id="">mas reciente
+    <input type="radio" name="ordenar" value="masAntiguo" id="">mas antiguo
+    <input type="radio" name="ordenar" value="mejorCalificacion" id="">mejor valorado
+    <input type="radio" name="ordenar" value="peorCalificacion" id="">peor valorado
+    <input type="submit" value="ordenar">
+</form>
+<hr>
+{{#if estanFiltradas}}
+<div>
+    <table>
+        <tr> 
+            <th>usuario</th><th>calificacion</th><th>opinion</th><th>fecha</th>
+    {{#each opinionesYUsernameFiltradas}}
+        <tr>
+            <td>{{this.usuario}}</td> 
+            <td>||{{this.calificacion}}/5||</td>
+            <td>{{this.opinion}}</td> 
+            <td>{{this.fecha}}</td> 
+        </tr>    
+    {{/each}} 
+        </tr> 
+    </table>
+</div>  
+{{else}}
+<div>
+    <table>
+        <tr> 
+            <th>usuario</th><th>calificacion</th><th>opinion</th><th>fecha</th>
+    {{#each opinionesYUsername}}
+        <tr>
+            <td>{{this.usuario}}</td> 
+            <td>||{{this.calificacion}}/5||</td>
+            <td>{{this.opinion}}</td> 
+            <td>{{this.fecha}}</td> 
+        </tr>    
+    {{/each}} 
+        </tr> 
+    </table>
+</div>  
+{{/if}}

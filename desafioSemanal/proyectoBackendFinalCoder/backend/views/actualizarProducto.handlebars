@@ -1,0 +1,10 @@
+<h3>actualizar producto</h3><br>
+
+<button onclick="location.href='/api/productos'">Inicio</button><br>
+
+<form action="/api/actualizarproducto/{{producto._id}}?_method=PUT" method="POST">
+    <input type="hidden" name="_method" value="PUT">
+    <input type="text" name="nombre" value="{{producto.nombre}}" >
+    <input type="number" name="precio" value="{{producto.precio}}">
+    <input type="submit" value="actualizar">
+</form>

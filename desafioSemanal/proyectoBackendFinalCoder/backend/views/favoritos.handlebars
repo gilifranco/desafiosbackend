@@ -1,0 +1,22 @@
+<button onclick="location.href='/api/productos'">Inicio</button>
+<h1>mis favoritos</h1>
+
+<div>
+    <table>
+        <tr> 
+<th>nombre</th><th>precio</th>
+    {{#each favoritosArray}}
+        <tr>
+            <td>{{this.nombre}}</td>
+            <td>{{this.precio}}</td>
+            <form action="/api/producto/{{this._id}}" method="get">
+            <td><input type="submit" value="ver producto"></td>
+            </form>
+            <form action="/api/eliminardefavoritos/{{this._id}}" method="post">
+            <td><input type="submit" value="eliminar de favoritos"></td>
+            </form>
+        </tr>    
+    {{/each}} 
+        </tr> 
+    </table>
+</div> 

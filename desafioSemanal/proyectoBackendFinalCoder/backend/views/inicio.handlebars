@@ -1,0 +1,56 @@
+<a href="/api/carrito">Ir al carrito</a>
+<a href="/api/datos">Mis datos</a>
+<a href="/api/favoritos">Favoritos</a>
+<button onclick="location.href='/api/auth/logout'">logout</button>
+{{productoIncluido}}
+
+<div class="buscarProducto">
+    <form action="/api/productos/" method="post">
+        <input type="text" name="buscar producto" id="" placeholder="buscar producto">
+        <input type="submit" value="buscar">
+    </form>
+</div>
+<hr>
+<div class="filtros">
+    <h3>filtros</h3>
+    <form action="/api/productosfiltrados" method="post">
+        <h5>precio</h5>
+            <input type="number" name="precioMinimo" id="" placeholder="precio minimo" value="0">
+            <input type="number" name="precioMaximo" id="" placeholder="precio maximo" value="1000000">
+        <h5>categoria</h5>
+            <input type="radio" value="tecnologia" name="categoria" id="tecnologia">tecnologia
+            <input type="radio" value="comida" name="categoria" id="comida">comida
+            <input type="radio" value="indumentaria" name="categoria" id="indumentaria">indumentaria <br>
+            <input type="radio" value="" name="categoria" id="">sin categoria <br>
+
+            <input type="submit" value="filtrar">
+    </form>
+</div><br>
+<hr>
+<div>
+    <table>
+        <tr> 
+            <th>nombre</th><th>precio</th>
+    {{#each productos}}
+        <tr>
+            <td>{{this.nombre}}</td>
+            <td>{{this.precio}}</td>
+            <form action="/api/producto/{{this._id}}" method="get">
+            <td><input type="submit" value="ver producto"></td>
+            </form>
+            <form action="/api/agregaralcarrito/{{this._id}}" method="post">
+            <td><input type="submit" value="agregar al carrito"></td>
+            </form>
+        {{#if this.favorito}}
+            <td>favorito</td>
+        {{else}}
+            <form action="/api/agregarafavoritos/{{this._id}}" method="post">
+            <td><input type="submit" value="agregar a favoritos"></td>
+            </form>
+        {{/if}}
+        </tr>    
+    {{/each}} 
+        </tr> 
+    </table>
+</div>  
+

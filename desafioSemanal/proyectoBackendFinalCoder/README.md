@@ -1,3 +1,4 @@
+
 # Curso Backend - MERN Stack: Proyecto Final
 ## E-commerce project
 #
@@ -8,8 +9,7 @@
 Desarrollo de backend de una aplicación e-commerce para vender productos referidos a Star Wars. Contiene: 
 - Las rutas necesarias para listar productos existentes, ingresar productos nuevos, borrar y modificar sus detalles, así como interactuar con el carrito de compras.
 - Se implementó una API RESTful con los verbos get, post, put y delete para cumplir con las acciones necesarias.
-- Se brindó al frontend un mecanismo de ingreso autorizado al sistema
-basado en JWT (Json Web Token).
+- Se brindó al frontend un mecanismo de ingreso autorizado al sistema.
 - Los productos ingresados se almacenan en una base de datos MongoDB.
 - El usuario puede registrar sus credenciales de acceso (email y password) para
 luego poder ingresar a su cuenta. Estas credenciales son guardadas en la
@@ -33,13 +33,12 @@ No se implementará Frontend, salvo en las situaciones donde sea necesario para 
 ### Tecnologías usadas
 - Node.js
 - MongoDB
-- Passport JWT
 - Mongoose
 - Bcrypt
 - Socket.io
 - Dotenv
-- Ejs(EJS (Embedded JavaScript Templating) es uno de los motores de plantillas más populares en JavaScript. Como su nombre lo indica, puede usarlo para incrustar código JavaScript en un lenguaje de plantilla para generar HTML. Este artículo proporciona una guía detallada para modelar su aplicación de nodo con EJS.)
 - Nodemailer
+-Twilio
 
 ### Descripciones específicas
 
@@ -78,7 +77,7 @@ No se implementará Frontend, salvo en las situaciones donde sea necesario para 
   * estado ( por defecto en ‘generada’)
   * Email de quién realizó la orden
 
-**ENVIO DE MAILS** -> Finalizada la orden, se envia un mail a la dirección de la cuenta con los detalles de la orden.
+**ENVIO DE Mensaje** -> Finalizada el registro, se envia un mail a la dirección de la cuenta con los detalles de la orden.
 
 **ARCHIVO DE CONFIGURACIÓN** -> Se dispone de un archivo de configuración externo con opciones para desarrollo y otras para producción, que son visualizadas a través de la vista `/config`. Como parámetros de configuración esta el puerto de escucha del servidor, la url de la base de datos, el mail que recibirá notificaciones del backend, tiempo de expiración de sesión y los que sea necesario incluir.
 

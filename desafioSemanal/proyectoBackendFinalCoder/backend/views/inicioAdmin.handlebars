@@ -1,0 +1,50 @@
+<a href="/api/crearproducto">Crear un producto</a>
+<a href="/api/datos">Mis datos</a>
+<button onclick="location.href='/api/auth/logout'">logout</button>
+
+<div class="buscarProducto">
+    <form action="/api/filtrarproducto" method="post">
+        <input type="text" name="buscarProducto" id="" placeholder="buscar producto">
+        <input type="submit" value="buscar">
+    </form>
+</div>
+<hr>
+<div class="filtros">
+    <h3>filtros</h3>
+    <form action="/api/productosfiltrados" method="post">
+        <h5>precio</h5>
+            <input type="number" name="precioMinimo" id="" placeholder="precio minimo" value="0">
+            <input type="number" name="precioMaximo" id="" placeholder="precio maximo" value="1000000">
+        <h5>categoria</h5>
+            <input type="radio" value="tecnologia" name="categoria" id="tecnologia">tecnologia
+            <input type="radio" value="comida" name="categoria" id="comida">comida
+            <input type="radio" value="indumentaria" name="categoria" id="indumentaria">indumentaria <br>
+            <input type="radio" value="" name="categoria" id="">sin categoria <br>
+
+            <input type="submit" value="filtrar">
+    </form>
+</div><br>
+<hr>
+<div>
+    <table>
+        <tr> 
+            <th>nombre</th><th>precio</th> 
+    {{#each productos}}
+        <tr>
+            <td>{{this.nombre}}</td>
+            <td>{{this.precio}}</td>
+            <form action="/api/producto/{{this._id}}" method="get">
+            <td><input type="submit" value="ver producto"></td>
+            </form>
+            <form action="/api/actualizarproducto/{{this._id}}" method="get">
+            <td><button>editar</button></td>
+            </form>
+            <form action="/api/eliminarproducto/{{this._id}}?_method=DELETE" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <td><button>eliminar</button></td>
+            </form>
+        </tr>    
+    {{/each}} 
+        </tr> 
+    </table>
+</div>  

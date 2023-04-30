@@ -1,0 +1,23 @@
+<button onclick="location.href='/api/productos'">Inicio</button>
+
+<h3>producto/s encontrado/s</h3>
+
+{{#if productoObj}}
+
+<div>
+    <table>
+        <tr> 
+            <th>nombre</th><th>precio</th> 
+        <tr>
+            <td>{{productoObj.nombre}}</td>
+            <td>{{productoObj.precio}}</td>
+            <form action="/api/agregaralcarrito/{{productoObj._id}}" method="post">
+            <td><input type="submit" value="agregar al carrito"></td>
+            </form>
+        </tr> 
+    </table>
+</div>
+
+{{else}}
+    <h3>el producto que buscas no existe</h3>
+{{/if}}
